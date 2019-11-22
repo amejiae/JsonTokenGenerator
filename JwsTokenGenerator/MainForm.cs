@@ -16,7 +16,7 @@ namespace JwsTokenGenerator
         public MainForm()
         {
             InitializeComponent();
-            ExpirationPicker.Value = DateTime.UtcNow.AddHours(3);
+            ExpirationPicker.Value = DateTime.UtcNow.AddMinutes(55);
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
@@ -46,7 +46,11 @@ namespace JwsTokenGenerator
             {
                 try
                 {
-                    var key = AsymmetricKeyPair.FromJson(JObject.Parse(jsonImport.Json));
+                    var json = JObject.Parse(jsonImport.Json);
+                    var account = json["serviceAccount"]["email"];
+                    EmailTextBox.Text = (string) account;
+
+                    var key = AsymmetricKeyPair.FromJson(json);
                     SetKeyElementsFromJson(key);
                 }
                 catch (Exception exception)

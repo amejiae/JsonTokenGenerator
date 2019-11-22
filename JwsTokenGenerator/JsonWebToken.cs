@@ -65,8 +65,7 @@ namespace JwsTokenGenerator
                         jsonWriter.Flush();
                         streamWriter.Flush();
 
-                        // Remove BOM. Not required but more in line with other languagtes
-                        return Convert.ToBase64String(ms.GetBuffer(), 3, (int)ms.Position - 3); // Exclude BOM
+                        return Convert.ToBase64String(ms.GetBuffer(), 3, (int)ms.Position - 3); 
                     }
                 }
             }
